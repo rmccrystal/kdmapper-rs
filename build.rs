@@ -1,4 +1,4 @@
-use std::fs;
+use std::{env, fs};
 use std::path::Path;
 
 fn main() {
@@ -26,5 +26,6 @@ fn main() {
 
     build.compile("kdmapper");
 
-    println!("cargo:rustc-link-search=native={}", Path::new("atlmfc/lib/x64").display());
+    let dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+    println!("cargo:rustc-link-search=native={}", Path::new(&dir).join("atlmfc/lib/x64").display());
 }
